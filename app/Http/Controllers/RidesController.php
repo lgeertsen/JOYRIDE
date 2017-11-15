@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Car;
+use App\Ride;
 use Illuminate\Http\Request;
 
-class CarController extends Controller
+class RidesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $rides = Ride::latest()->get();
+        
+        return view('rides.index', compact('rides'));
     }
 
     /**
@@ -41,10 +42,10 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Car  $car
+     * @param  \App\Ride  $ride
      * @return \Illuminate\Http\Response
      */
-    public function show(Car $car)
+    public function show(Ride $ride)
     {
         //
     }
@@ -52,10 +53,10 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Car  $car
+     * @param  \App\Ride  $ride
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $car)
+    public function edit(Ride $ride)
     {
         //
     }
@@ -64,10 +65,10 @@ class CarController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Car  $car
+     * @param  \App\Ride  $ride
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, Ride $ride)
     {
         //
     }
@@ -75,10 +76,10 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Car  $car
+     * @param  \App\Ride  $ride
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Car $car)
+    public function destroy(Ride $ride)
     {
         //
     }

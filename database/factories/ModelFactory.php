@@ -18,9 +18,34 @@ $factory->define(App\User::class, function (Faker $faker) {
 
     return [
         'firstName' => $faker->firstName,
-        'name' => $faker->lastName,
+        'lastName' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Car::class, function (Faker $faker) {
+    return [
+        'user_id' => function() {
+          return factory('App\User')->create()->id;
+        },
+        'brand' => $faker->word,
+        'model' => $faker->word,
+        'color' => $faker->colorName,
+    ];
+});
+
+$factory->define(App\Ride::class, function (Faker $faker) {
+    $car = factory('App\Car')->create();
+    
+    return [
+        'user_id' => $car->owner->id,
+        'car_id' => $car->id,
+        'seats' => $faker->randomDigitNotNull,
+        'start' => $faker->city,
+        'destination' => $faker->city,
+        'date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+ 1 years'),
+        'time' => $faker->time($format = 'H:i:s'),
     ];
 });

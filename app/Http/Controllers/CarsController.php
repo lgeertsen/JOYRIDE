@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Ride;
+use App\Car;
 use Illuminate\Http\Request;
 
-class RideController extends Controller
-{
+class CarsController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $cars = Car::latest()->get();
+        
+        return view('cars.index', compact('cars'));
     }
 
     /**
@@ -22,9 +22,8 @@ class RideController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('cars.create');
     }
 
     /**
@@ -33,18 +32,30 @@ class RideController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $this->validate($request, [
+          'brand' => 'required',
+          'model' => 'required',
+          'color' => 'required'
+        ]);
+
+        $car = Car::create([
+          'user_id' => auth()->id(),
+          'brand' => request('brand'),
+          'model' => request('model'),
+          'color' => request('color')
+        ]);
+
+        return redirect()->route('cars');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ride  $ride
+     * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function show(Ride $ride)
+    public function show(Car $car)
     {
         //
     }
@@ -52,10 +63,10 @@ class RideController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ride  $ride
+     * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ride $ride)
+    public function edit(Car $car)
     {
         //
     }
@@ -64,10 +75,10 @@ class RideController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ride  $ride
+     * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ride $ride)
+    public function update(Request $request, Car $car)
     {
         //
     }
@@ -75,10 +86,10 @@ class RideController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Ride  $ride
+     * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ride $ride)
+    public function destroy(Car $car)
     {
         //
     }
