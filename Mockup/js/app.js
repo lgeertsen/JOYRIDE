@@ -1,3 +1,5 @@
+var a;
+
 function initMap() {
   var styledMapType = new google.maps.StyledMapType(
     [
@@ -186,6 +188,21 @@ function initMap() {
   };
   document.getElementById('start').addEventListener('change', onChangeHandler);
   document.getElementById('end').addEventListener('change', onChangeHandler);
+
+
+
+  var options = {
+    types: ['(cities)'],
+    componentRestrictions: {country: "fr"}
+  };
+
+  var input = document.getElementById('pac-input');
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+
+
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -195,6 +212,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     travelMode: 'DRIVING'
   }, function(response, status) {
     if (status === 'OK') {
+      a = response;
+      console.log(response);
       directionsDisplay.setDirections(response);
     } else {
       window.alert('Directions request failed due to ' + status);
