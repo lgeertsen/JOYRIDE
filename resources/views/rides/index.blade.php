@@ -19,7 +19,7 @@
                             Hour: {{ $ride->time }}
                         </div>
                         <div>
-                            Car: {{ $ride->car->color . ' ' . $ride->car->brand . ' ' . $ride->car->model }}
+                            Car: {{ $ride->car->description() }}
                         </div>
                         <div>
                             From: {{ $ride->start }}

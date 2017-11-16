@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css" type="text/css" />
 </head>
 <body>
     <div id="app">
@@ -75,6 +75,9 @@
     </div>
 
     <!-- Scripts -->
+    
+    @yield('googleMaps')
+    
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

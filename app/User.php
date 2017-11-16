@@ -29,4 +29,8 @@ class User extends Authenticatable {
     public function name() {
         return $this->firstName . ' ' . $this->lastName;
     }
+    
+    public function cars() {
+        return $this->hasMany(Car::class);
+    }
 }

@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+use App\User;
 use App\Ride;
 use Illuminate\Http\Request;
 
-class RidesController extends Controller
-{
+class RidesController extends Controller {
+    public function __construct() {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +30,9 @@ class RidesController extends Controller
      */
     public function create()
     {
-        return view('rides.create');
+        $user = User::where('id', auth()->id())->first();
+        $cars = Car::where('user_id', $user->id)->get();
+        return view('rides.create', compact('cars'));
     }
 
     /**
