@@ -14,7 +14,7 @@ class RidesController extends Controller
      */
     public function index() {
         $rides = Ride::latest()->get();
-        
+
         return view('rides.index', compact('rides'));
     }
 
@@ -25,7 +25,7 @@ class RidesController extends Controller
      */
     public function create()
     {
-        //
+        return view('rides.create');
     }
 
     /**

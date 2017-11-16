@@ -25,3 +25,4 @@ Route::get('/cars/new', 'CarsController@create');
 Route::post('/cars', 'CarsController@store');
 
 Route::get('/rides', 'RidesController@index')->name('rides');
+Route::get('/rides/new', 'RidesController@create');
