@@ -1,5 +1,3 @@
-console.log("test");
-
 var a;
 
 var map;
@@ -210,17 +208,17 @@ function initMap() {
     componentRestrictions: {country: "fr"}
   };
 
-  
+
   //map.controls[google.maps.ControlPosition.TOP_LEFT].push(startInput);
 
   startAutocomplete = new google.maps.places.Autocomplete(startInput, options);
   destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput, options);
-  
+
   places = new google.maps.places.PlacesService(map);
-  
+
   startAutocomplete.addListener('place_changed', onPlaceChanged);
 
-  
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {

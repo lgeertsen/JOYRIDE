@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('customCSS')
+  <link rel="stylesheet" href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+@endsection
+
+@section('customJS')
+  <script src="{{ asset('js/moment.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('js/bootstrap-material-datetimepicker.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('js/maps.js') }}" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGsRjLvPNIqa1tHaCfIFeZ1BFlhmDu0o8&callback=initMap&libraries=places"
+    async defer></script>
+  <script type="text/javascript">
+    $('#date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY', weekStart : 1, time: false, minDate : new Date() });
+    $('#time').bootstrapMaterialDatePicker({ format : 'HH:mm', date: false });
+  </script>
+@endsection
+
 @section('content')
 <div class="container">
   <div class="row">
@@ -39,17 +56,17 @@
               <label for="start">Start:</label>
               <input type="text" class="form-control controls" id="start" name="start" value="{{ old('start') }}" required>
             </div>
-            
+
             <div class="form-group">
               <label for="destination">Destination:</label>
               <input type="text" class="form-control" id="destination" name="destination" value="{{ old('destination') }}" required>
             </div>
-            
+
             <div class="form-group">
               <label for="date">Date:</label>
               <input type="text" class="form-control" id="date" name="date" value="{{ old('date') }}" required>
             </div>
-            
+
             <div class="form-group">
               <label for="time">Time:</label>
               <input type="text" class="form-control" id="time" name="time" value="{{ old('time') }}" required>
@@ -82,11 +99,4 @@
     </div>
   </div>
 </div>
-@endsection
-
-
-@section('googleMaps')
-    <script type="text/javascript" src="/js/maps.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGsRjLvPNIqa1tHaCfIFeZ1BFlhmDu0o8&callback=initMap&libraries=places"
-    async defer></script>
 @endsection
