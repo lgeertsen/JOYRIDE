@@ -26,3 +26,9 @@ Route::post('/cars', 'CarsController@store');
 
 Route::get('/rides', 'RidesController@index')->name('rides');
 Route::get('/rides/new', 'RidesController@create');
+Route::post('/rides', 'RidesController@store');
+
+
+// OAuth Routes
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');

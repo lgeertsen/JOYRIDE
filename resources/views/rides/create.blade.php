@@ -12,7 +12,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGsRjLvPNIqa1tHaCfIFeZ1BFlhmDu0o8&callback=initMap&libraries=places"
     async defer></script>
   <script type="text/javascript">
-    $('#date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY', weekStart : 1, time: false, minDate : new Date() });
+    $('#date').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD', weekStart : 1, time: false, minDate : new Date() });
     $('#time').bootstrapMaterialDatePicker({ format : 'HH:mm', date: false });
   </script>
 @endsection

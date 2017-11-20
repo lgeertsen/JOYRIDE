@@ -43,7 +43,26 @@ class RidesController extends Controller {
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+          'car_id' => 'required',
+          'seats' => 'required',
+          'start' => 'required',
+          'destination' => 'required',
+          'date' => 'required',
+          'time' => 'required'
+        ]);
+
+        $ride = Ride::create([
+          'user_id' => auth()->id(),
+          'car_id' => request('car_id'),
+          'seats' => request('seats'),
+          'start' => request('start'),
+          'destination' => request('destination'),
+          'date' => request('date'),
+          'time' => request('time')
+        ]);
+
+        return redirect()->route('rides');
     }
 
     /**
