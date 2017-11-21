@@ -49,3 +49,16 @@ $factory->define(App\Ride::class, function (Faker $faker) {
         'time' => $faker->time($format = 'H:i:s'),
     ];
 });
+
+$factory->define(App\Review::class, function (Faker $faker) {
+    return [
+        'user_id' => function() {
+          return factory('App\User')->create()->id;
+        },
+        'writer_id' => function() {
+          return factory('App\User')->create()->id;
+        },
+        'score' => $faker->randomDigitNotNull,
+        'body' => $faker->text
+    ];
+});

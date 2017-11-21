@@ -25,10 +25,16 @@ Route::get('/cars/new', 'CarsController@create');
 Route::post('/cars', 'CarsController@store');
 
 Route::get('/rides', 'RidesController@index')->name('rides');
-Route::get('/rides/new', 'RidesController@create');
+Route::get('/rides/new', 'RidesController@create')->name('rides.new');
 Route::post('/rides', 'RidesController@store');
+
+Route::get('/reviews', 'ReviewsController@index')->name('reviews');
+Route::get('/reviews/{user}/new', 'ReviewsController@create');
+Route::post('/reviews', 'ReviewsController@store');
 
 
 // OAuth Routes
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');

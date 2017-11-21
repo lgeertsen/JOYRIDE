@@ -8,7 +8,7 @@
             
             @foreach ($rides as $ride)
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ride of {{ $ride->creator->name() }} </div>
+                    <div class="panel-heading">Ride about {{ $ride->creator->name() }} </div>
     
                     <div class="panel-body">
                         
