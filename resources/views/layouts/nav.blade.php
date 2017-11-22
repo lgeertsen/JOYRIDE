@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
 
@@ -19,9 +19,9 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ route('rides') }}">Rides</a></li>
+                <!--<li><a href="{{ route('rides') }}">Rides</a></li>
                 <li><a href="{{ route('rides.new') }}">New Ride</a></li>
-                <li><a href="{{ route('cars') }}">Cars</a></li>
+                <li><a href="{{ route('cars') }}">Cars</a></li>-->
             </ul>
 
             <!-- Right Side Of Navbar -->

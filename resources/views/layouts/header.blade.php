@@ -11,5 +11,7 @@
 
       <!-- Styles -->
       @include('layouts.css')
+      
+      @include('layouts.IE')
 
   </head>

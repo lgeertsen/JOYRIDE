@@ -4,13 +4,15 @@
 @include('layouts.header')
 
 <body>
-    <div id="app">
-        @include('layouts.nav')
+  <div id="app">
+    @include('layouts.nav')
+  
+  <div id="content">
+    @yield('content')
+  </div>
+  </div>
 
-        @yield('content')
-    </div>
-
-    <!-- Scripts -->
-    @include('layouts.js')
+  <!-- Scripts -->
+  @include('layouts.js')
 </body>
 </html>

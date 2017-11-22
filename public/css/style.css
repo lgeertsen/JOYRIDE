@@ -1,0 +1,53 @@
+/*******************
+*     GENERAL      *
+*******************/
+
+body {
+  background-color: #fff !important;
+}
+
+#content {
+  padding-top: 70px;
+}
+
+input {
+  background-color: #fff;
+}
+
+
+
+/*******************
+*      HEADER      *
+*******************/
+
+#header {
+  height: 700px;
+  background-image: url('../img/car1.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+#header #headerwrap {
+  padding-top: 100px;
+}
+#header h1 {
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 150px;
+  padding-bottom: 30px;
+  letter-spacing: 8px;
+  font-size: 150px;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px #000;
+}
+#header h6 {
+  text-align: center;
+  color: #ffffff;
+  padding-bottom: 30px;
+  letter-spacing: 8px;
+  font-size: 44px;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px #000;
+}
