@@ -8350,12 +8350,15 @@ button.close {
   }
 }
 
+
+
+
+
+
+
 #map {
   height: 500px;
 }
-
-
-body { padding-bottom: 100px; }
 .level {
   display: flex;
   align-items: center;

@@ -7,9 +7,10 @@
   <div id="app">
     @include('layouts.nav')
   
-  <div id="content">
-    @yield('content')
-  </div>
+    <div id="content">
+      @yield('content')
+    </div>
+    
   </div>
 
   <!-- Scripts -->
