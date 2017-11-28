@@ -185,9 +185,10 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 6,
     center: {lat: 46.227638, lng: 2.213749},
-    mapTypeControlOptions: {
+    /*mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'styled_map']
-    }
+    }*/
+    disableDefaultUI: true,
   });
 
   map.mapTypes.set('styled_map', styledMapType);
@@ -219,7 +220,7 @@ function initMap() {
   startAutocomplete.addListener('place_changed', onPlaceChanged);
 
 
-  if (navigator.geolocation) {
+ /* if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
@@ -228,7 +229,7 @@ function initMap() {
 
       map.setCenter(pos);
     }, function() {});
-  }
+  }*/
 }
 
 
