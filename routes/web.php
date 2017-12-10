@@ -27,6 +27,7 @@ Route::post('/cars', 'CarsController@store');
 Route::get('/rides', 'RidesController@index')->name('rides');
 Route::get('/rides/new', 'RidesController@create')->name('rides.new');
 Route::post('/rides', 'RidesController@store');
+Route::get('/rides/{user}/{ride}', 'RidesController@show')->name('ride.show');
 
 Route::get('/reviews', 'ReviewsController@index')->name('reviews');
 Route::get('/reviews/{user}/new', 'ReviewsController@create');

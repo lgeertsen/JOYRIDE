@@ -32,7 +32,8 @@
   <div id="headerwrap" class="">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-12 col-md-8 col-md-offset-2">
+				<div class="col-sm-12 col-md-8 col-md-offset-2 text-center">
+				  <!--<img style="width: 80%;" src="{{ asset('img/Logo_Joyride.png') }}"></img>-->
 					<h1>JOYRIDE</h1>
 					<h6>The n°1 carpooling service</h6>
 				</div>
@@ -48,31 +49,31 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12 col-md-8 col-md-offset-2">
-        <form class="form-inline">
-          
-          {{ csrf_field() }}
+        <form class="form-inline" action="/rides" method="get">
           
           <div class="row">
             <div class="col-md-3">
-              <div class="form-group">
-                <input type="text" class="form-control" name="start" id="start" placeholder="Start">
+              <div class="input-field">
+                <input type="text" class="validate" name="start" id="start" placeholder="Start">
               </div>
             </div>
             
             <div class="col-md-3">
-              <div class="form-group">
-                <input type="text" class="form-control" name="destination" id="destination" placeholder="Destination">
+              <div class="input-field">
+                <input type="text" class="validate" name="destination" id="destination" placeholder="Destination">
               </div>
             </div>
             
             <div class="col-md-3">
-              <div class="form-group">
-                <input type="text" class="form-control" name="date" id="date" placeholder="Date">
+              <div class="input-field">
+                <input type="text" class="date-picker" name="date" id="date" placeholder="Date">
               </div>
             </div>
             
             <div class="col-md-3">
-              <button type="submit" class="btn btn-default btn-block btn-danger">Search Ride</button>
+              <div class="input-field">
+                <button type="submit" class="btn btn-default btn-block btn-danger">Search Ride</button>
+              </div>
             </div>
           </div>
           

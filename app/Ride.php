@@ -14,4 +14,8 @@ class Ride extends Model {
   public function car() {
     return $this->belongsTo(Car::class, 'car_id');
   }
+  
+  public function scopeFilter($query, $filters) {
+    return $filters->apply($query);
+  }
 }

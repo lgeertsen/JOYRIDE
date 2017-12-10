@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\User;
 use App\Ride;
+use App\Filters\RideFilters;
 use Illuminate\Http\Request;
 
 class RidesController extends Controller {
@@ -17,8 +18,9 @@ class RidesController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $rides = Ride::latest()->get();
+    public function index(RideFilters $filters) {
+        $rides = $this->getRides($filters);
+        //$rides2 = Ride::latest()->get();
 
         return view('rides.index', compact('rides'));
     }
@@ -71,9 +73,8 @@ class RidesController extends Controller {
      * @param  \App\Ride  $ride
      * @return \Illuminate\Http\Response
      */
-    public function show(Ride $ride)
-    {
-        //
+    public function show(User $user, Ride $ride) {
+        return view('rides.show', compact('ride'));
     }
 
     /**
@@ -108,5 +109,11 @@ class RidesController extends Controller {
     public function destroy(Ride $ride)
     {
         //
+    }
+    
+    protected function getRides(RideFilters $filters) {
+        $rides = Ride::latest()->filter($filters);
+    
+        return $rides->get();
     }
 }

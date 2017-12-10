@@ -27,6 +27,7 @@
                         <div>
                             To: {{ $ride->destination }}
                         </div>
+                        <a href="{{ route('ride.show', ['user' => $ride->creator->id, 'ride' => $ride->id]) }}">Show</a>
 
                     </div>
                 </div>
