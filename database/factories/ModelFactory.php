@@ -38,7 +38,7 @@ $factory->define(App\Car::class, function (Faker $faker) {
 
 $factory->define(App\Ride::class, function (Faker $faker) {
     $car = factory('App\Car')->create();
-    
+
     return [
         'user_id' => $car->owner->id,
         'car_id' => $car->id,
@@ -60,5 +60,11 @@ $factory->define(App\Review::class, function (Faker $faker) {
         },
         'score' => $faker->randomDigitNotNull,
         'body' => $faker->text
+    ];
+});
+
+$factory->define(App\UserBan::class, function (Faker $faker) {
+    return [
+        'user_id' => 3
     ];
 });

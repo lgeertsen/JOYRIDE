@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/userban/{user}', 'AdminController@UserBan')->name('banuser');
+
 
 Route::get('/cars', 'CarsController@index')->name('cars');
 Route::get('/cars/new', 'CarsController@create');

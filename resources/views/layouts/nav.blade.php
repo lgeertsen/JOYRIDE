@@ -38,6 +38,9 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('profile', ['user' => Auth::user()->id]) }}">Profile</a></li>
+                            @if (Auth::user()->admin)
+                              <li><a href="{{ route('admin') }}">Admin Panel</a></li>
+                            @endif
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

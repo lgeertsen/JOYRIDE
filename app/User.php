@@ -25,12 +25,16 @@ class User extends Authenticatable {
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
     public function name() {
         return $this->firstName . ' ' . $this->lastName;
     }
-    
+
     public function cars() {
         return $this->hasMany(Car::class);
+    }
+
+    public function banned() {
+      return $this->hasOne(UserBan::class);
     }
 }
