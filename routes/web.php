@@ -33,6 +33,7 @@ Route::get('/reviews', 'ReviewsController@index')->name('reviews');
 Route::get('/reviews/{user}/new', 'ReviewsController@create');
 Route::post('/reviews', 'ReviewsController@store');
 
+Route::post('/passengers/{ride}', 'PassengersController@store');
 
 // OAuth Routes
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');

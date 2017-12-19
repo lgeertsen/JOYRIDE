@@ -50,33 +50,33 @@
     <div class="row">
       <div class="col-sm-12 col-md-8 col-md-offset-2">
         <form class="form-inline" action="/rides" method="get">
-          
+
           <div class="row">
             <div class="col-md-3">
               <div class="input-field">
                 <input type="text" class="validate" name="start" id="start" placeholder="Start">
               </div>
             </div>
-            
+
             <div class="col-md-3">
               <div class="input-field">
                 <input type="text" class="validate" name="destination" id="destination" placeholder="Destination">
               </div>
             </div>
-            
+
             <div class="col-md-3">
               <div class="input-field">
                 <input type="text" class="date-picker" name="date" id="date" placeholder="Date">
               </div>
             </div>
-            
+
             <div class="col-md-3">
               <div class="input-field">
-                <button type="submit" class="btn btn-default btn-block btn-danger">Search Ride</button>
+                <button type="submit" class="btn red">Search Ride</button>
               </div>
             </div>
           </div>
-          
+
         </form>
       </div>
     </div>

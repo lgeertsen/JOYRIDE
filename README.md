@@ -1,10 +1,39 @@
 # JOYRIDE le n°1 site de covoiturage
 
+### Launch project
 
-Google Maps API key: AIzaSyAGsRjLvPNIqa1tHaCfIFeZ1BFlhmDu0o8
+You need to have PHP7, composer and laravel installed
+```bash
+git clone https://github.com/lgeertsen/JOYRIDE.git
+cd JOYRIDE
+```
+Create the database
+```sql
+mysql> CREATE DATABASE joyride;
+mysql> exit
+```
+Copy .env.example to .env
+Fill in your information for the database
+```
+DB_DATABASE=joyride
+DB_USERNAME=root
+DB_PASSWORD=*yourPassword*
+```
+Then in the terminal
+```bash
+composer install
+php artisan key:generate
+```
+Now you can launch the server
+```bash
+php artisan server
+```
+You can visit the project on http://localhost:8000
 
-get lng & lat from google request:
-a.routes[0].legs[0].start_location.lat();
-a.routes[0].legs[0].start_location.lng();
-a.routes[0].legs[0].end_location.lat();
-a.routes[0].legs[0].end_location.lng();
+### Seed database
+
+```
+php artisan tinker
+>> factory('App\Ride', 50)->create'); //Creation of 50 rides, cars and users
+>> exit
+```

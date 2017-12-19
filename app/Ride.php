@@ -14,8 +14,20 @@ class Ride extends Model {
   public function car() {
     return $this->belongsTo(Car::class, 'car_id');
   }
-  
+
   public function scopeFilter($query, $filters) {
     return $filters->apply($query);
+  }
+
+  public function passengers() {
+    return $this->hasMany(Passenger::class, 'ride_id');
+  }
+
+  public function addPassenger() {
+    $attributes = ['user_id' => auth()->id()];
+
+    if(! $this->passengers()->where($attributes)->exists()) {
+      return $this->passengers()->create($attributes);
+    }
   }
 }
