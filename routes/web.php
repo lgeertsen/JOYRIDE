@@ -11,35 +11,84 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/',  function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [
+  'uses' => 'HomeController@index',
+  'middleware' => 'forbid-banned-user',
+])->name('home');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
-Route::get('/userban/{user}', 'AdminController@UserBan')->name('banuser');
+Route::get('/userban/{user}', 'AdminController@UserBan')->name('userban');
+Route::get('/userbantemp/{user}', 'AdminController@UserBanTemp')->name('userbantemp');
+Route::get('/userunban/{user}', 'AdminController@UserUnban')->name('userunban');
+Route::get('/banned', 'AdminController@banned');
 
 
-Route::get('/cars', 'CarsController@index')->name('cars');
-Route::get('/cars/new', 'CarsController@create');
-Route::post('/cars', 'CarsController@store');
+Route::get('/cars', [
+  'uses' => 'CarsController@index',
+  'middleware' => 'forbid-banned-user',
+])->name('cars');
 
-Route::get('/rides', 'RidesController@index')->name('rides');
-Route::get('/rides/new', 'RidesController@create')->name('rides.new');
-Route::post('/rides', 'RidesController@store');
-Route::get('/rides/{user}/{ride}', 'RidesController@show')->name('ride.show');
+Route::get('/cars/new', [
+  'uses' => 'CarsController@create',
+  'middleware' => 'forbid-banned-user',
+]);
 
-Route::get('/reviews', 'ReviewsController@index')->name('reviews');
-Route::get('/reviews/{user}/new', 'ReviewsController@create');
-Route::post('/reviews', 'ReviewsController@store');
+Route::post('/cars', [
+  'uses' => 'CarsController@store',
+  'middleware' => 'forbid-banned-user',
+]);
 
-Route::post('/passengers/{ride}', 'PassengersController@store');
+Route::get('/rides', [
+  'uses' => 'RidesController@index',
+  'middleware' => 'forbid-banned-user',
+])->name('rides');
+
+Route::get('/rides/new', [
+  'uses' => 'RidesController@create',
+  'middleware' => 'forbid-banned-user',
+])->name('rides.new');
+
+Route::post('/rides', [
+  'uses' => 'RidesController@store',
+  'middleware' => 'forbid-banned-user',
+]);
+
+Route::get('/rides/{user}/{ride}', [
+  'uses' => 'RidesController@show',
+  'middleware' => 'forbid-banned-user',
+])->name('ride.show');
+
+Route::get('/reviews', [
+  'uses' => 'ReviewsController@index',
+  'middleware' => 'forbid-banned-user',
+])->name('reviews');
+
+Route::get('/reviews/{user}/new', [
+  'uses' => 'ReviewsController@create',
+  'middleware' => 'forbid-banned-user',
+]);
+
+Route::post('/reviews', [
+  'uses' => 'ReviewsController@store',
+  'middleware' => 'forbid-banned-user',
+]);
+
+Route::post('/passengers/{ride}', [
+  'uses' => 'PassengersController@store',
+  'middleware' => 'forbid-banned-user',
+]);
 
 // OAuth Routes
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
+Route::get('/profiles/{user}', [
+  'uses' => 'ProfilesController@show',
+  'middleware' => 'forbid-banned-user',
+])->name('profile');
