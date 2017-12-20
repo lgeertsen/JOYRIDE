@@ -17,7 +17,7 @@
           </tr>
         @foreach ($users as $user)
           <tr>
-            <td>{{ $user->name() }}
+            <td>{{ $user->fullName() }}
               @if($user->banned()->exists())
                 <span class="label label-danger">Banned</span></td>
               @endif

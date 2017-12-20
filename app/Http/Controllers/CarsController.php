@@ -13,7 +13,7 @@ class CarsController extends Controller {
      */
     public function index() {
         $cars = Car::latest()->get();
-        
+
         return view('cars.index', compact('cars'));
     }
 

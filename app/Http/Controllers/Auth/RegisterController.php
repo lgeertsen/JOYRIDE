@@ -49,6 +49,9 @@ class RegisterController extends Controller {
       'lastName' => 'required|string|max:255',
       'email' => 'required|string|email|max:255|unique:users',
       'password' => 'required|string|min:6|confirmed',
+      'birthday' => 'required',
+      'address' => 'required',
+      'telephone' => 'required',
     ]);
   }
 
@@ -59,11 +62,18 @@ class RegisterController extends Controller {
    * @return \App\User
    */
   protected function create(array $data) {
-    return User::create([
+    $user = User::create([
       'firstName' => $data['firstName'],
       'lastName' => $data['lastName'],
       'email' => $data['email'],
       'password' => bcrypt($data['password']),
+      'birthday' => $data['birthday'],
+      'address' => $data['address'],
+      'telephone' => $data['telephone'],
     ]);
+
+    app('App\Http\Controllers\MailsController')->welcome($user);
+
+    return $user;
   }
 }

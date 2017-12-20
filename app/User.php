@@ -13,9 +13,11 @@ class User extends Authenticatable {
      *
      * @var array
      */
-    protected $fillable = [
-        'firstName', 'lastName', 'email', 'password', 'provider', 'provider_id',
-    ];
+    // protected $fillable = [
+    //     'firstName', 'lastName', 'email', 'password',
+    // ];
+
+    protected $guarded = ['admin'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -26,15 +28,15 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
-    public function name() {
-        return $this->firstName . ' ' . $this->lastName;
-    }
-
     public function cars() {
         return $this->hasMany(Car::class);
     }
 
     public function banned() {
       return $this->hasOne(UserBan::class);
+    }
+
+    public function fullName() {
+        return $this->firstName . ' ' . $this->lastName;
     }
 }

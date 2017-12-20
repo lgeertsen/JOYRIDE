@@ -29,7 +29,7 @@
 
                     @foreach ($users as $user)
                         <div>
-                            {{ $user->name() }}
+                            {{ $user->fullName() }}
                         </div>
                     @endforeach
 

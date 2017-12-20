@@ -7,7 +7,7 @@
     <div class="col-md-8">
 
       <div class="panel panel-default">
-        <div class="panel-heading">Ride about {{ $ride->creator->name() }} </div>
+        <div class="panel-heading">Ride about {{ $ride->creator->fullName() }} </div>
 
         <div class="panel-body">
 
@@ -44,7 +44,7 @@
 
         <div class="panel-body">
             @forelse ($passengers as $passenger)
-              {{ $passenger->person->name() }}
+              {{ $passenger->person->fullName() }}
             @empty
               <h5>There are no passengers</h5>
             @endforelse

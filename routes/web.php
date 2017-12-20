@@ -39,7 +39,28 @@ Route::post('/reviews', 'ReviewsController@store');
 Route::post('/passengers/{ride}', 'PassengersController@store');
 
 // OAuth Routes
-Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+// Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
+// Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
+
+Route::get('/first_connection', 'FirstConnectionController@index');
+
+Route::get('/mailable', function () {
+    $user = App\User::find(1);
+
+    return new App\Mail\Welcome($user);
+});
+
+Route::get('/sendemail', function() {
+  $data = array(
+    'name' => "JOYRIDE",
+  );
+
+  Mail::send('emails.welcome', $data, function($message) {
+    $message->from('lee@joyride.com', 'Lee @ JOYRIDE');
+    $message->to('lee.geertsen@hotmail.com')->subject('Welcome to JOYRIDE');
+  });
+
+  return "Your email has been sent successfully";
+});

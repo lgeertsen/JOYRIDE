@@ -8350,17 +8350,7 @@ button.close {
   }
 }
 
-
-
-
-
-
-
 #map {
   height: 500px;
 }
-.level {
-  display: flex;
-  align-items: center;
-}
-.flex { flex: 1; }
+
