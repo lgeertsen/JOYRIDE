@@ -25,7 +25,22 @@ class AdminController extends Controller
       }
     }
 
-  public function UserBan($user){
+  public function UserBan(User $user){
+    $user->ban([
+      'comment' => 'Ban'
+    ]);
+    return redirect('/admin');
+  }
+
+  public function UserBanTemp(User $user){
+    $user->ban([
+      'expired_at' => '+1 month'
+    ]);
+    return redirect('/admin');
+  }
+
+  public function UserUnban(User $user){
+    $user->unban();
     return redirect('/admin');
   }
 }

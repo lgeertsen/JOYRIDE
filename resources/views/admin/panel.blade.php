@@ -18,8 +18,11 @@
         @foreach ($users as $user)
           <tr>
             <td>{{ $user->fullName() }}
-              @if($user->banned()->exists())
+              @if($user->isBanned())
                 <span class="label label-danger">Banned</span></td>
+              @endif
+              @if($user->admin)
+                <span class="label label-success">Admin</span></td>
               @endif
             <td><!-- Single button -->
             <div class="btn-group">
@@ -28,8 +31,9 @@
               </button>
               <ul class="dropdown-menu">
                 <li><a href="{{ route('profile', ['user' => $user->id]) }}">Profile</a></li>
-                <li><a href="#">Temporary Ban</a></li>
-                <li><a href="{{ route('banuser', ['user' => $user->id]) }}e">Permanent Ban</a></li>
+                <li><a href="{{ route('userbantemp', ['user' => $user]) }}">Temporary Ban</a></li>
+                <li><a href="{{ route('userban', ['user' => $user]) }}">Permanent Ban</a></li>
+                <li><a href="{{ route('userunban', ['user' => $user]) }}">Unban user</a></li>
               </ul>
             </div></td>
           </tr>
@@ -40,7 +44,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">New run</div>
         <div class="panel-body">
-          Panel content
+          Work in progress...
         </div>
       </div></div>
     </div>
