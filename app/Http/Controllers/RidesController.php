@@ -23,7 +23,7 @@ class RidesController extends Controller {
     $rides = $this->getRides($filters);
     //$rides2 = Ride::latest()->get();
 
-    return view('rides.index', ['rides' => $rides, 'query' => $query]);
+    return view('rides.index', ['rides' => $rides]);
   }
 
   /**

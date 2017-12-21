@@ -64,8 +64,9 @@ And last but not least compile Sass and Vue files
 npm install
 npm run dev
 ```
-Now you can launch the server
+Now you can migrate the database & launch the server
 ```bash
+php artisan migrate
 php artisan server
 ```
 You can visit the project on http://localhost:8000

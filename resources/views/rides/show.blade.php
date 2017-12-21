@@ -12,7 +12,7 @@
 
 @section('content')
   <div class="container">
-    <h1>{{ $ride->start }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ $ride->destination }}</h1>
+    <h2>{{ $ride->start }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ $ride->destination }}</h2>
     <div class="row">
       @auth
 
@@ -20,13 +20,19 @@
 
         <div class="col-md-7">
 
-          <div class="panel panel-default">
+          <div class="panel panel-info">
             <div class="panel-heading">
-              Ride by
+              Driver:
               <a href="{{ route('profile', ['user' => $ride->creator->id]) }} }}">{{ $ride->creator->fullName() }}</a>
             </div>
 
             <div class="panel-body">
+              <h3>Departure: {{ DateTime::createFromFormat('Y-m-d', $ride->date)->format('D jS F ') }} at {{ date('G:i', strtotime($ride->time)) }}</h3>
+
+              <h1 class="pull-right">{{ $ride->fullPrice() }}€</h1>
+
+              <h4>Car: {{ $ride->car->description() }}</h4>
+
               <h4>Total Seats: {{ $ride->seats }}</h4>
               <h4>Seats left: <span v-text="passengerCount"></span></h4>
               {{-- @if (!$passengers->contains('user_id', auth()->id())) --}}
@@ -50,21 +56,7 @@
             <button type="submit" class="btn btn-danger">Cancel participation</button>
           </form>
         @endif --}}
-        <div>
-          Date: {{ $ride->date }}
-        </div>
-        <div>
-          Hour: {{ $ride->time }}
-        </div>
-        <div>
-          Car: {{ $ride->car->description() }}
-        </div>
-        <div>
-          From: {{ $ride->start }}
-        </div>
-        <div>
-          To: {{ $ride->destination }}
-        </div>
+
       </div>
     </div>
 
@@ -95,11 +87,17 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        Ride by
+        Driver:
         <a href="{{ route('profile', ['user' => $ride->creator->id]) }} }}">{{ $ride->creator->fullName() }}</a>
       </div>
 
       <div class="panel-body">
+        <h3>Departure: {{ DateTime::createFromFormat('Y-m-d', $ride->date)->format('D jS F ') }} at {{ date('G:i', strtotime($ride->time)) }}</h3>
+
+        <h1 class="pull-right">{{ $ride->fullPrice() }}€</h1>
+
+        <h4>Car: {{ $ride->car->description() }}</h4>
+
         <h4>Total Seats: {{ $ride->seats }}</h4>
         <h4>Seats left: {{ $ride->seats - $passengerCount }}</h4>
         {{-- @if (!$passengers->contains('user_id', auth()->id())) --}}
@@ -117,21 +115,6 @@
       <button type="submit" class="btn btn-danger">Cancel participation</button>
     </form>
   @endif --}}
-  <div>
-    Date: {{ $ride->date }}
-  </div>
-  <div>
-    Hour: {{ $ride->time }}
-  </div>
-  <div>
-    Car: {{ $ride->car->description() }}
-  </div>
-  <div>
-    From: {{ $ride->start }}
-  </div>
-  <div>
-    To: {{ $ride->destination }}
-  </div>
 </div>
 </div>
 

@@ -7,32 +7,18 @@
         <div class="list-group">
           @foreach ($rides as $ride)
             <div class="list-group-item">
-              <div class="">Ride by {{ $ride->creator->fullName() }} </div>
+                <h3>{{ $ride->start }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ $ride->destination }}</h3>
 
-              <div class="">
-                <h3>Price: {{ $ride->fullPrice() }}€</h3>
-                <h5>{{ $ride->distanceToKm() }}km</h5>
-                <h5>{{ $ride->durationToText() }}</h5>
-                {{ $ride->duration }}
-                <div>
-                  Date: {{ $ride->date }}
-                </div>
-                <div>
-                  Hour: {{ $ride->time }}
-                </div>
-                <div>
-                  Seats: {{ $ride->seats }}
-                </div>
-                <div>
-                  From: {{ $ride->start }}
-                </div>
-                <div>
-                  To: {{ $ride->destination }}
-                </div>
-                <a href="{{ route('ride.show', ['user' => $ride->creator->id, 'ride' => $ride->id]) }}">Show</a>
+                <h1 class="pull-right">{{ $ride->fullPrice() }}€</h1>
+
+                <h5>Departure: {{ DateTime::createFromFormat('Y-m-d', $ride->date)->format('D jS F ') }} at {{ date('G:i', strtotime($ride->time)) }}</h5>
+
+            <h5>Driver: {{ $ride->creator->fullName() }}</h5>
+
+            <h4>Seats left: {{ $ride->seats - $ride->passengers()->get()->count() }}</h4>
+                <a class="btn btn-primary btn-xs" href="{{ route('ride.show', ['user' => $ride->creator->id, 'ride' => $ride->id]) }}">Show</a>
 
               </div>
-            </div>
           @endforeach
 
         </div>

@@ -43470,10 +43470,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     for (var i = 0; i < this.passengers.length; i++) {
       if (this.passengers[i].user_id = this.userid) {
-        inside = true;
+        this.inside = true;
       }
     }
-    if (inside) {
+    if (this.inside) {
       this.showJoin = false;
       this.showCancel = true;
     }
