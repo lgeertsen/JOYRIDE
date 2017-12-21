@@ -18,7 +18,7 @@ class AdminController extends Controller
 
   public function index(){
       if(auth()->user()->admin){
-        $users = User::get();
+        $users = User::paginate(10);
         return view('admin.panel', ['users' => $users]);
       }else{
         return redirect('/');

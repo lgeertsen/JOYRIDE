@@ -5,7 +5,7 @@
     <div class="row">
         <h2><i class=""></i> Admin Panel</h2></div><br />
       <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-primary">
         <!-- Default panel contents -->
         <div class="panel-heading">User Manager</div>
@@ -13,6 +13,8 @@
         <table class="table">
           <tr>
             <th>Name</th>
+            <th>Reviews Count</th>
+            <th>Score avg</th>
             <th>Manage</th>
           </tr>
         @foreach ($users as $user)
@@ -24,6 +26,17 @@
               @if($user->admin)
                 <span class="label label-success">Admin</span></td>
               @endif
+              <td>
+                {{ $user->reviews->count() }}
+              </td>
+              <td>
+                {{-- @if(!$user->reviews()->isEmpty()) --}}
+                  {{ $user->score() }}
+                  @if ($user->score() < 5)
+                    <span class="label label-warning">Low Score</span></td>
+                  @endif
+                {{-- @endif --}}
+              </td>
             <td><!-- Single button -->
             <div class="btn-group">
               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,14 +52,16 @@
           </tr>
         @endforeach
         </table>
-      </div></div>
-      <div class="col-md-5 col-md-offset-2">
+      </div>
+      {{ $users->links() }}
+    </div>
+      {{-- <div class="col-md-5 col-md-offset-2">
       <div class="panel panel-primary">
         <div class="panel-heading">New run</div>
         <div class="panel-body">
           Work in progress...
         </div>
-      </div></div>
+      </div></div> --}}
     </div>
     </div>
   @endsection
