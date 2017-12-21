@@ -84,6 +84,11 @@ Route::post('/passengers/{ride}', [
   'middleware' => 'forbid-banned-user',
 ]);
 
+Route::get('/profiles/{user}', [
+  'uses' => 'ProfilesController@show',
+   'middleware' => 'forbid-banned-user',
+ ])->name('profile');
+
 // OAuth Routes
 // Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
 // Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
