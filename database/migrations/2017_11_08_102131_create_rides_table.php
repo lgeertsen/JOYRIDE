@@ -22,6 +22,9 @@ class CreateRidesTable extends Migration
             $table->string('destination');
             $table->date('date');
             $table->time('time');
+            $table->unsignedInteger('distance')->default(0);
+            $table->unsignedInteger('duration')->default(0);
+            $table->double('price');
             $table->timestamps();
         });
     }

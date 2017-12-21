@@ -12,11 +12,11 @@ class ReviewsController extends Controller {
 
     return view('reviews.index', compact('reviews'));
   }
-  
+
   public function create(User $user) {
     return view('reviews.create', compact('user'));
   }
-  
+
   public function store(Request $request) {
     $this->validate($request, [
       'user_id' => 'required',
@@ -31,6 +31,7 @@ class ReviewsController extends Controller {
       'body' => request('body')
     ]);
 
-    return redirect()->route('reviews');
+    return redirect()->route('profile', ['user' => request('user_id')])
+                     ->with('flash', 'Your review has been submitted successfully');
   }
 }

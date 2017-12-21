@@ -60,14 +60,14 @@
                                 </a>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
+
+                        {{-- <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <a href="{!! url('login/facebook') !!}" class="btn btn-primary btn-block">
                                     Login with facebook
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>

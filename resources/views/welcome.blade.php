@@ -6,6 +6,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/animate.css') }}" type="text/css" />
   <link rel="stylesheet" href="{{ asset('css/home.css') }}" type="text/css" />
+  <style media="screen">
+    .navbar-form {
+      display: none;
+    }
+  </style>
 @endsection
 
 @section('customJS')
@@ -19,7 +24,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGsRjLvPNIqa1tHaCfIFeZ1BFlhmDu0o8&callback=initMap&libraries=places"
     async defer></script>
   <script type="text/javascript">
-    var input = document.getElementById("start");
+    var input = document.getElementById("startNav");
     var header = document.getElementById("headerwrap");
     start.onclick = function() {
       header.className = "animated slideOutUp";

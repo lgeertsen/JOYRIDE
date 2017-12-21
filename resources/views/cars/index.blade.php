@@ -4,12 +4,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2>Cars</h2>
+          <div class="">
+            <h2>Your cars</h2>
+            <a href="/cars/new" class="btn btn-success">
+              Add car
+            </a>
+          </div>
 
-            @foreach ($cars as $car)
+            @forelse ($cars as $car)
                 <div class="panel panel-default">
-                    <div class="panel-heading">Car of {{ $car->owner->fullName() }} </div>
-
                     <div class="panel-body">
 
                         <div>
@@ -24,7 +27,9 @@
 
                     </div>
                 </div>
-            @endforeach
+            @empty
+              <h3>You haven't added any cars yet. Come on and <a href="/cars/new">add one</a></h3>
+            @endforelse
 
         </div>
     </div>

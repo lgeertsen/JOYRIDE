@@ -59,6 +59,11 @@ private function establishSocketConnection()
 }
 ...
 ```
+And last but not least compile Sass and Vue files
+```bash
+npm install
+npm run dev
+```
 Now you can launch the server
 ```bash
 php artisan server
@@ -69,6 +74,6 @@ You can visit the project on http://localhost:8000
 
 ```
 php artisan tinker
->> factory('App\Ride', 50)->create'); //Creation of 50 rides, cars and users
+>> factory('App\Ride', 50)->create(); //Creation of 50 rides, cars and users
 >> exit
 ```

@@ -41,4 +41,12 @@ class User extends Authenticatable implements BannableContract{
     public function fullName() {
         return $this->firstName . ' ' . $this->lastName;
     }
+
+    public function reviews() {
+      return $this->hasMany(Review::class);
+    }
+
+    public function score() {
+      return round($this->reviews()->avg('score'), 1);
+    }
 }

@@ -17,72 +17,40 @@ Route::get('/',  function () {
 
 Auth::routes();
 
-Route::get('/home', [
-  'uses' => 'HomeController@index',
-  'middleware' => 'forbid-banned-user',
-])->name('home');
-
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/userban/{user}', 'AdminController@UserBan')->name('userban');
 Route::get('/userbantemp/{user}', 'AdminController@UserBanTemp')->name('userbantemp');
 Route::get('/userunban/{user}', 'AdminController@UserUnban')->name('userunban');
 Route::get('/banned', 'AdminController@banned');
 
+Route::group(['middleware' => 'forbid-banned-user'], function() {
+  Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/cars', [
-  'uses' => 'CarsController@index',
-  'middleware' => 'forbid-banned-user',
-])->name('cars');
+  Route::get('/cars/new','CarsController@create');
+  Route::get('/cars', 'CarsController@index')->name('cars');
+  Route::post('/cars', 'CarsController@store');
+  Route::patch('/cars/{car}', 'CarsController@update');
+  Route::delete('/cars/{car}', 'CarsController@destroy');
 
-Route::get('/cars/new', [
-  'uses' => 'CarsController@create',
-  'middleware' => 'forbid-banned-user',
-]);
+  Route::get('/rides', 'RidesController@index')->name('rides');
+  Route::get('/rides/new', 'RidesController@create')->name('rides.new');
+  Route::post('/rides', 'RidesController@store');
+  Route::get('/rides/{user}/{ride}', 'RidesController@show')->name('ride.show');
+  Route::delete('/rides/{ride}', 'RidesController@destroy');
 
-Route::post('/cars', [
-  'uses' => 'CarsController@store',
-  'middleware' => 'forbid-banned-user',
-]);
+  Route::get('/reviews', 'ReviewsController@index')->name('reviews');
+  Route::get('/reviews/{user}/new', 'ReviewsController@create');
+  Route::post('/reviews', 'ReviewsController@store');
 
-Route::get('/rides', [
-  'uses' => 'RidesController@index',
-  'middleware' => 'forbid-banned-user',
-])->name('rides');
+  Route::post('/passengers/{ride}', 'PassengersController@store');
+  Route::delete('/passengers/{ride}', 'PassengersController@destroy');
 
-Route::get('/rides/new', [
-  'uses' => 'RidesController@create',
-  'middleware' => 'forbid-banned-user',
-])->name('rides.new');
+  Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
+  Route::get('/profile', function() {
+    return redirect()->route('profile', ['user' => auth()->user()->id]);
+  });
+});
 
-Route::post('/rides', [
-  'uses' => 'RidesController@store',
-  'middleware' => 'forbid-banned-user',
-]);
-
-Route::get('/rides/{user}/{ride}', [
-  'uses' => 'RidesController@show',
-  'middleware' => 'forbid-banned-user',
-])->name('ride.show');
-
-Route::get('/reviews', [
-  'uses' => 'ReviewsController@index',
-  'middleware' => 'forbid-banned-user',
-])->name('reviews');
-
-Route::get('/reviews/{user}/new', [
-  'uses' => 'ReviewsController@create',
-  'middleware' => 'forbid-banned-user',
-]);
-
-Route::post('/reviews', [
-  'uses' => 'ReviewsController@store',
-  'middleware' => 'forbid-banned-user',
-]);
-
-Route::post('/passengers/{ride}', [
-  'uses' => 'PassengersController@store',
-  'middleware' => 'forbid-banned-user',
-]);
 
 // OAuth Routes
 // Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
@@ -90,21 +58,29 @@ Route::post('/passengers/{ride}', [
 
 Route::get('/first_connection', 'FirstConnectionController@index');
 
-Route::get('/mailable', function () {
+Route::get('/mailable/1', function () {
     $user = App\User::find(1);
 
     return new App\Mail\Welcome($user);
 });
 
-Route::get('/sendemail', function() {
-  $data = array(
-    'name' => "JOYRIDE",
-  );
+Route::get('/mailable/2', function () {
+    $ride = App\Ride::find(1);
+    $passenger = App\User::find(2);
 
-  Mail::send('emails.welcome', $data, function($message) {
-    $message->from('lee@joyride.com', 'Lee @ JOYRIDE');
-    $message->to('lee.geertsen@hotmail.com')->subject('Welcome to JOYRIDE');
-  });
+    return new App\Mail\newPassengerMail($ride, $passenger);
+});
 
-  return "Your email has been sent successfully";
+Route::get('/mailable/3', function () {
+    $ride = App\Ride::find(1);
+    $passenger = App\User::find(2);
+
+    return new App\Mail\cancelPassengerMail($ride, $passenger);
+});
+
+Route::get('/mailable/4', function () {
+    $ride = App\Ride::find(1);
+    $user = App\User::find(2);
+
+    return new App\Mail\cancelRide($ride, $user);
 });

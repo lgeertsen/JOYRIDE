@@ -33,8 +33,12 @@ class RidesController extends Controller {
   */
   public function create()
   {
-    $user = User::where('id', auth()->id())->first();
+    $user = auth()->user();
     $cars = Car::where('user_id', $user->id)->get();
+
+    if($cars->isEmpty()) {
+      return redirect('/cars/new')->with('flash', 'You need to register a car before you can add a ride');
+    }
     return view('rides.create', compact('cars'));
   }
 
@@ -52,7 +56,10 @@ class RidesController extends Controller {
       'start' => 'required',
       'destination' => 'required',
       'date' => 'required',
-      'time' => 'required'
+      'time' => 'required',
+      'price' => 'required',
+      'distance' => 'required',
+      'duration' => 'required',
     ]);
 
     $ride = Ride::create([
@@ -62,10 +69,13 @@ class RidesController extends Controller {
       'start' => request('start'),
       'destination' => request('destination'),
       'date' => request('date'),
-      'time' => request('time')
+      'time' => request('time'),
+      'price' => request('price'),
+      'distance' => request('distance'),
+      'duration' => request('duration'),
     ]);
 
-    return redirect()->route('rides');
+    return redirect()->route('profile', ['user' => auth()->user()->id]);
   }
 
   /**
@@ -75,9 +85,12 @@ class RidesController extends Controller {
   * @return \Illuminate\Http\Response
   */
   public function show(User $user, Ride $ride) {
+    $passengers = $ride->passengers()->get();
+
     return view('rides.show', [
       'ride' => $ride,
-      'passengers' => $ride->passengers()->get()
+      'passengers' => $passengers,
+      'passengerCount' => $passengers->count(),
     ]);
   }
 
@@ -112,11 +125,19 @@ class RidesController extends Controller {
   */
   public function destroy(Ride $ride)
   {
-    //
+    $this->authorize('update', $ride);
+
+    $ride->delete();
+
+    if(request()->wantsJson()) {
+      return response([], 204);
+    }
+
+    return redirect()->route('profile', ['user' => auth()->user()->id]);
   }
 
   protected function getRides(RideFilters $filters) {
-    $rides = Ride::latest()->filter($filters)->get();
+    $rides = Ride::latest()->filter($filters)->where('date', '>=', date("Y-m-d"))->get();
 
     return $rides;
   }

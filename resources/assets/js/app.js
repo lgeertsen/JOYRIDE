@@ -16,6 +16,9 @@ require('./bootstrap');
  */
 
 Vue.component('flash', require('./components/Flash.vue'));
+Vue.component('participate', require('./components/Participate.vue'));
+Vue.component('car', require('./components/Car.vue'));
+Vue.component('ride', require('./components/Ride.vue'));
 
 const app = new Vue({
     el: '#app'

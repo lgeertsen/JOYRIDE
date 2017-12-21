@@ -13,6 +13,24 @@ class PassengersController extends Controller {
   public function store(Ride $ride) {
     $ride->addPassenger();
 
-    return back();
+    app('App\Http\Controllers\MailsController')->newPassenger($ride);
+
+    if(request()->wantsJson()) {
+      return response([], 204);
+    }
+
+    return redirect("/rides/{$ride->creator->id}/{$ride->id}");
+  }
+
+  public function destroy(Ride $ride) {
+    $ride->passengers()->where('user_id', auth()->id())->delete();
+
+    app('App\Http\Controllers\MailsController')->cancelPassenger($ride);
+
+    if(request()->wantsJson()) {
+      return response([], 204);
+    }
+
+    return redirect("/rides/{auth()->id()}/{$ride->id}");
   }
 }

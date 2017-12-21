@@ -3,6 +3,11 @@
 @section('customCSS')
   <link rel="stylesheet" href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" type="text/css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style media="screen">
+    .navbar-form {
+      display: none;
+    }
+  </style>
 @endsection
 
 @section('customJS')
@@ -73,6 +78,28 @@
             </div>
 
             <div class="form-group">
+              <label for="price">Price/KM:</label>
+              <select class="form-control" id="price" name="price" required>
+                {{-- <option value=""></option> --}}
+                @for ($i = 0.05; $i < 0.20; $i+=0.01)
+                  <option value="{{ $i }}" {{ (old('price') == $i || $i == 0.05 )? 'selected' : '' }}>
+                    {{ $i }}
+                  </option>
+                @endfor
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="distance">Distance:</label>
+              <input type="text" class="form-control" id="distance" name="distance" value="{{ old('distance') }}">
+            </div>
+
+            <div class="form-group">
+              <label for="duration">Duration:</label>
+              <input type="text" class="form-control" id="duration" name="duration" value="{{ old('duration') }}">
+            </div>
+
+            <div class="form-group">
               <button type="submit" class="btn btn-primary">Add</button>
             </div>
 
@@ -90,7 +117,11 @@
 
     <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Map</div>
+        <div class="panel-heading">
+          <h3>Map</h3>
+          <h5>Distance: <span id="distanceText"></span></h5>
+          <h5>Duration: <span id="durationText"></span></h5>
+        </div>
 
         <div class="panel-body">
           <div id="map"></div>
